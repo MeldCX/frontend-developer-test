@@ -30,7 +30,7 @@ export function DeviceView({ number }) {
         circles.map((data) => {
           return(
             <div key={data} className="holder-animate">
-              <span style={{transform:`rotate(${(data*30)}deg)`}} className="circle-element">{data}</span>
+              <span style={{transform:`rotate(${(data*30)}deg)`}} className="circle-element"></span>
             </div>
           )
         })

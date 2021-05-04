@@ -91,7 +91,7 @@ button#loginBtn:hover {
   left: 45%;
   width: 300px;
   height: 1px;
-  background: #fff;
+  background: transparent;
   transform-origin: left;
   /* animation: animate 2s linear infinite; */
   margin: 40px;
