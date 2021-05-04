@@ -71,7 +71,7 @@ button#loginBtn:hover {
 
 .animated-element {
   position: absolute;
-  top: 45%;
+  top: 42%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 600px;
@@ -80,6 +80,7 @@ button#loginBtn:hover {
   border: 0px;
   text-align: center;
   border-radius: 300px;
+  padding:20px;
 }
 
 .animated-element::before {
@@ -103,25 +104,23 @@ button#loginBtn:hover {
   top: calc(50% - 2px);
   left: 50%;
   width: 50%;
-  /* height: 5px; */
-  background: #fff;
+  height: 4px;
+  background: transparent;
   transform-origin: left;
   animation: animate 3s linear infinite;
-
-  margin:30px;
+  margin:50px;
+  transform: rotate(5deg);
 }
 
 .circle-element::before {
   content: '';
   position: absolute;
-  margin:30px;
   width: 75px;
   height: 75px;
-  top: -37.5px;
-  right: -37.5px;
+  top: -45px;
+  right: -45px;
   border-radius: 50%;
   background: #fff;
-  
 }
 
 @keyframes animate {

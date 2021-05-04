@@ -1,26 +1,33 @@
 import React from "react";
 
-export function Main({ children }) {
+export function Circles({ getkey }) {
   return (
-    <div className="circle" style={style.circleBottom}></div>
+    <span className="circle-element"></span>
   );
 }
 
+// Set the main content
 export function DeviceView({ number }) {
-  const [circles, setCircles] = React.useState([...Array(number).keys()])
-  
-  // create temp array
+  const [circles, setCircles] = React.useState([])
+
+  function drawCircles() {
+    return (
+      circles.map((data) => <span key={data} className="circle-element"></span>)
+    )
+  }
+
   React.useEffect(() => {
-    console.log(number)
-    setCircles(() => {
-      return [...Array(number).keys(), number+1]
-    });
+    setCircles((prevState) => {
+      console.log('component:', prevState);
+      prevState = [...Array(number).keys()]
+      return prevState
+    })
   }, [number])
 
   return (
     <div className="animated-element">
       {
-        circles.map((data) => (<span key={data} className="circle-element"></span>))
+        drawCircles()
       }
       <p style={style.numberContent}>{number}</p>
       <h4 style={style.deviceContent}>

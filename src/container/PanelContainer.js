@@ -3,24 +3,31 @@ import { DeviceView, ControlNav } from "../components/PanelComponents";
 import { Button, Notification } from "../components/Components";
 import { Redirect } from 'react-router-dom'
 import axios from "axios";
+  
+const url = "http://35.201.2.209:8000";
+const user_info = {
+  name: "Jose Elmer Macalla",
+  email: "macszoner94@gmail.com",
+  repoUrl: "https://github.com/0xdeviant/frontend-developer-test",
+  message: "When I realized the full potential of React, I instantly got hooked to it."
+}
 
 export default function PanelContainer({ history }) {
   const [number, setNumber] = useState(0);
   const [notify, setNotify] = useState(false);
   const session = localStorage.getItem("meldcx_token");
-  const url = "http://35.201.2.209:8000";
-  const user_info = {
-    name: "Jose Elmer Macalla",
-    email: "macszoner94@gmail.com",
-    repoUrl: "https://github.com/0xdeviant/frontend-developer-test",
-    message: "When I realized the full potential of React, I instantly got hooked to it."
-  }
 
-  function getData() {
-    axios.get(`${url}/devices`).then((res) => {
+  async function getData() {
+    await axios.get(`${url}/devices`).then((res) => {
       const devices = res.data.devices.length;
-      setNumber(devices);
-    }).catch((e) => console.log(e));
+      return devices
+    }).then((data) => {
+      setNumber((prev) => {
+        prev = data;
+        return prev;
+      });
+    })
+    .catch((e) => console.log(e));
   }
 
   function onNotify() {
@@ -42,6 +49,7 @@ export default function PanelContainer({ history }) {
     // initial setup; re renders the component and prevents memory leak when not rendered.
     if (session !== null && number === 0) {
       getData();
+      console.log('Container', number);
     }
 
     const pollTime = setInterval(() => {
@@ -49,7 +57,7 @@ export default function PanelContainer({ history }) {
     }, 5000);
 
     return () => clearInterval(pollTime);
-  }, [number, session])
+  })
 
   // Conditional Rendering - Dependent on session token
   if (session !== null) {
@@ -74,6 +82,8 @@ export default function PanelContainer({ history }) {
 
 }
 
+
+// STYLES
 const styles = {
   navController: {
     display: "flex",
