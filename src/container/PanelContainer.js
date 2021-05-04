@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Main, DeviceView, ControlNav } from "../components/PanelComponents";
+import { DeviceView, ControlNav } from "../components/PanelComponents";
 import { Button, Notification } from "../components/Components";
 import { Redirect } from 'react-router-dom'
 import axios from "axios";
@@ -49,17 +49,15 @@ export default function PanelContainer({ history }) {
     }, 5000);
 
     return () => clearInterval(pollTime);
-  }, [number])
+  }, [number, session])
 
   // Conditional Rendering - Dependent on session token
   if (session !== null) {
     return (
       <div style={styles.container}>
-        <Main>
-          <DeviceView number={number} />
-        </Main>
+        <DeviceView number={number} />
 
-        {notify && <Notification message="Notification sent!" delay={2000}/>}
+        {notify && <Notification message="Notification sent!" delay={2000} />}
         <div style={styles.navController}>
           <ControlNav>
             <Button onClick={onNotify} buttonLabel="NOTIFY" style={styles.notifyButton} />
@@ -70,7 +68,7 @@ export default function PanelContainer({ history }) {
     );
   }
 
-  return(
+  return (
     <Redirect from="/panel" to="/" />
   )
 
@@ -86,10 +84,10 @@ const styles = {
   },
   container: {
     position: "relative",
-    height: "95vh",
+    height: "97.8vh",
     overflowY: "hidden",
     margin: 0,
-    paddingTop: "20px",
+    paddingTop: 20,
     backgroundColor: "#F06D40"
   },
 

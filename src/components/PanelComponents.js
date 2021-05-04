@@ -1,16 +1,27 @@
+import React from "react";
+
 export function Main({ children }) {
   return (
-    <div>
-      <div className="circle" style={style.circleTop}></div>
-      {children}
-      <div className="circle" style={style.circleBottom}></div>
-    </div>
+    <div className="circle" style={style.circleBottom}></div>
   );
 }
 
 export function DeviceView({ number }) {
+  const [circles, setCircles] = React.useState([...Array(number).keys()])
+  
+  // create temp array
+  React.useEffect(() => {
+    console.log(number)
+    setCircles(() => {
+      return [...Array(number).keys(), number+1]
+    });
+  }, [number])
+
   return (
-    <div>
+    <div className="animated-element">
+      {
+        circles.map((data) => (<span key={data} className="circle-element"></span>))
+      }
       <p style={style.numberContent}>{number}</p>
       <h4 style={style.deviceContent}>
         DEVICES
@@ -46,18 +57,20 @@ const style = {
   },
 
   deviceContent: {
-    marginTop: -30,
+    marginTop: -100,
     textAlign: "center",
     color: "#fff",
     lineHeight: 1,
     fontWeight: 600,
-    fontSize: 24
+    fontSize: 24,
+    marginBottom: 0
   },
 
   numberContent: {
     fontSize: 120,
     fontWeight: 400,
-    marginBottom: 0,
+    top: 50,
+    position: "relative",
     color: "#fff"
   }
 };
