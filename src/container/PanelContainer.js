@@ -55,6 +55,7 @@ export default function PanelContainer({ history }) {
 
     const pollTime = setInterval(() => {
       getData();
+      document.location.reload();
     }, 5000);
 
     return () => {
