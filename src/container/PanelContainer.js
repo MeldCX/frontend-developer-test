@@ -58,9 +58,6 @@ export default function PanelContainer({ history }) {
     }, 5000);
 
     return () => {
-      setNumber((number) => {
-        return number
-      })
       clearInterval(pollTime)
     };
   }, [setInitial])
