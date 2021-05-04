@@ -1,35 +1,41 @@
 import React from "react";
 
-export function Circles({ getkey }) {
+export function Circles() {
   return (
     <span className="circle-element"></span>
   );
 }
 
+
 // Set the main content
 export function DeviceView({ number }) {
   const [circles, setCircles] = React.useState([])
 
-  function drawCircles() {
-    return (
-      circles.map((data) => <span key={data} className="circle-element"></span>)
-    )
-  }
-
   React.useEffect(() => {
+    console.log('Render:', number)
     setCircles((prevState) => {
-      console.log('component:', prevState);
       prevState = [...Array(number).keys()]
+      console.log('Updated:', prevState.length)
       return prevState
     })
+
+    return () => {
+      setCircles([...Array(number).keys()])
+    }
   }, [number])
 
   return (
     <div className="animated-element">
       {
-        drawCircles()
+        circles.map((data) => {
+          return(
+            <div key={data} className="holder-animate">
+              <span style={{transform:`rotate(${(data*30)}deg)`}} className="circle-element">{data}</span>
+            </div>
+          )
+        })
       }
-      <p style={style.numberContent}>{number}</p>
+      <p style={style.numberContent}>{!number ? <small style={{fontSize:16}}>Calculating...</small> : number}</p>
       <h4 style={style.deviceContent}>
         DEVICES
         <br />
@@ -38,6 +44,7 @@ export function DeviceView({ number }) {
     </div>
   );
 }
+
 
 export function ControlNav({ children }) {
   return <div style={style.controlNav}>{children}</div>;

@@ -14,6 +14,7 @@ const user_info = {
 
 export default function PanelContainer({ history }) {
   const [number, setNumber] = useState(0);
+  const [initial, setInitial] = useState(false);
   const [notify, setNotify] = useState(false);
   const session = localStorage.getItem("meldcx_token");
 
@@ -47,17 +48,22 @@ export default function PanelContainer({ history }) {
 
   useEffect(() => {
     // initial setup; re renders the component and prevents memory leak when not rendered.
-    if (session !== null && number === 0) {
+    if (session !== null && !initial) {
       getData();
-      console.log('Container', number);
+      setInitial(true);
     }
 
     const pollTime = setInterval(() => {
       getData();
     }, 5000);
 
-    return () => clearInterval(pollTime);
-  })
+    return () => {
+      setNumber((number) => {
+        return number
+      })
+      clearInterval(pollTime)
+    };
+  }, [setInitial])
 
   // Conditional Rendering - Dependent on session token
   if (session !== null) {

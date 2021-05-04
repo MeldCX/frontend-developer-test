@@ -74,53 +74,47 @@ button#loginBtn:hover {
   top: 42%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px;
+  width: 800px;
   height: 600px;
   background: transparent;
   border: 0px;
   text-align: center;
-  border-radius: 300px;
   padding:20px;
 }
 
-.animated-element::before {
-  content: "";
-  position: absolute;
-  top: -3px;
-  left: -3px;
-  width: 100%;
-  height: 100%;
-  border: 5px solid transparent;
-  border-radius: 300px;
-  
-  /* border-top: 5px solid #fff;
-  border-right: 5px solid #fff; */
-  animation: animateCircle 3s linear infinite;
-}
+
 
 .circle-element {
   display: block;
   position: absolute;
-  top: calc(50% - 2px);
-  left: 50%;
-  width: 50%;
-  height: 4px;
-  background: transparent;
+  top: calc(50% - 10px);
+  left: 45%;
+  width: 300px;
+  height: 1px;
+  background: #fff;
   transform-origin: left;
-  animation: animate 3s linear infinite;
-  margin:50px;
-  transform: rotate(5deg);
+  /* animation: animate 2s linear infinite; */
+  margin: 40px;
 }
 
 .circle-element::before {
-  content: '';
-  position: absolute;
+  content:'';
+  position: inherit;
   width: 75px;
   height: 75px;
   top: -45px;
   right: -45px;
   border-radius: 50%;
   background: #fff;
+  transform: rotate(30deg);
+  margin: 40px;
+}
+
+.holder-animate {
+  position:absolute;
+  left:50%;
+  top:50%;
+  animation: animate 2s linear infinite;
 }
 
 @keyframes animate {
